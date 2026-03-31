@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ರೈತನ ಮಿತ್ರ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="booking-page">
+    <header class="header">
+        <div class="header-left">
+            <h1>ರೈತನ ಮಿತ್ರ</h1>
+        </div>
+        <div class="header-right">
+            <span id="welcomeMsg">Welcome, User</span>
+            <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="machines-section">
+            <h2>Available Machinery</h2>
+            <div class="machine-grid" id="machineGrid"></div>
+        </section>
+
+        <!-- Booking Modal -->
+        <div class="modal-overlay hidden" id="bookingModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Book Machine</h3>
+                    <button class="modal-close" onclick="closeModal()">&times;</button>
+                </div>
+                <form id="bookingForm" onsubmit="handleBooking(event)">
+                    <div class="form-group">
+                        <label for="bookingPhone">Phone Number</label>
+                        <input type="tel" id="bookingPhone" placeholder="Enter phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingDate">Date</label>
+                        <input type="date" id="bookingDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingAcres">Acres</label>
+                        <input type="number" id="bookingAcres" min="0.1" step="0.1" placeholder="Enter number of acres" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookingPlace">Place</label>
+                        <input type="text" id="bookingPlace" placeholder="Enter place / location" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Book Now</button>
+                </form>
+            </div>
+        </div>
+
+        <section class="history-section">
+            <h2>Booking History</h2>
+            <div id="bookingHistory" class="booking-history">
+                <p class="empty-state">No bookings yet. Select a machine above to get started!</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/booking.js"></script>
+</body>
+</html>

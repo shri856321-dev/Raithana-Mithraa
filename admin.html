@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ರೈತನ ಮಿತ್ರ</title>
+    <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body class="admin-page">
+    <header class="header">
+        <div class="header-left">
+            <h1>Admin Dashboard</h1>
+        </div>
+        <div class="header-right">
+            <span id="welcomeMsg">Welcome, Admin</span>
+            <button class="btn btn-outline" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <img src="images/rice.jpg" alt="Rice field" class="admin-banner">
+
+        <!-- Summary Stat Cards -->
+        <div class="stat-cards">
+            <div class="stat-card">
+                <span class="stat-value" id="statUsers">0</span>
+                <span class="stat-label">Registered Users</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="statBookings">0</span>
+                <span class="stat-label">Total Bookings</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="statPending">0</span>
+                <span class="stat-label">Pending Work</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="statCompleted">0</span>
+                <span class="stat-label">Completed Works</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="statAcres">0</span>
+                <span class="stat-label">Total Acres</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-value" id="statCost">₹0</span>
+                <span class="stat-label">Total Cost</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Feature Cards -->
+        <div class="dashboard-cards">
+            <div class="dashboard-card" onclick="toggleCard(this, event)">
+                <span class="dashboard-card-icon">👥</span>
+                <h3>Registered Users</h3>
+                <p>View all users</p>
+                <div class="card-content hidden">
+                    <div class="table-wrapper">
+                        <table class="admin-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Username</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="dashboard-card" onclick="toggleCard(this, event)">
+                <span class="dashboard-card-icon">🔧</span>
+                <h3>Registered Machines</h3>
+                <p>View machine details</p>
+                <div class="card-content hidden">
+                    <div class="table-wrapper">
+                        <table class="admin-table" id="machinesTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Machine Name</th>
+                                    <th>Cost/Hr</th>
+                                </tr>
+                            </thead>
+                            <tbody id="machinesBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card" onclick="toggleCard(this, event)">
+                <span class="dashboard-card-icon">📅</span>
+                <h3>All Bookings</h3>
+                <p>View all bookings</p>
+                <div class="card-content hidden">
+                    <div class="table-wrapper">
+                        <table class="admin-table" id="bookingsTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User</th>
+                                    <th>Phone</th>
+                                    <th>Machine</th>
+                                    <th>Date</th>
+                                    <th>Acres</th>
+                                    <th>Place</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card" onclick="toggleCard(this, event)">
+                <span class="dashboard-card-icon">💰</span>
+                <h3>Machine Cost</h3>
+                <p>Set cost per hour</p>
+                <div class="card-content hidden">
+                    <div class="table-wrapper">
+                        <table class="admin-table" id="machineCostTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Machine Name</th>
+                                    <th>Cost/Hr</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="machineCostBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card" onclick="toggleCard(this, event)">
+                <span class="dashboard-card-icon">🧾</span>
+                <h3>Generated Bills</h3>
+                <p>View all generated bills</p>
+                <div class="card-content hidden">
+                    <h4 style="margin:10px 0 6px 0;color:#e67e22;">Bill Pending</h4>
+                    <div class="table-wrapper">
+                        <table class="admin-table" id="billPendingTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User</th>
+                                    <th>Phone</th>
+                                    <th>Machine</th>
+                                    <th>Date</th>
+                                    <th>Acres</th>
+                                    <th>Place</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="billPendingBody"></tbody>
+                        </table>
+                    </div>
+                    <h4 style="margin:18px 0 6px 0;color:#27ae60;">Generated Bills</h4>
+                    <div class="table-wrapper">
+                        <table class="admin-table" id="billsTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User</th>
+                                    <th>Phone</th>
+                                    <th>Machine</th>
+                                    <th>Date</th>
+                                    <th>Acres</th>
+                                    <th>Place</th>
+                                    <th>Completed On</th>
+                                </tr>
+                            </thead>
+                            <tbody id="billsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="dashboard-card" onclick="toggleCard(this, event)">
+                <span class="dashboard-card-icon">✅</span>
+                <h3>Work Complete</h3>
+                <p>View completed work</p>
+                <div class="card-content hidden">
+                    <div class="table-wrapper">
+                        <table class="admin-table" id="workCompleteTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User</th>
+                                    <th>Phone</th>
+                                    <th>Machine</th>
+                                    <th>Date</th>
+                                    <th>Acres</th>
+                                    <th>Place</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="workCompleteBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
